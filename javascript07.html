@@ -70,8 +70,8 @@
         */
 
         if(a>=70) {     //판정 계산
-            for(var i=0;i<item.length;i++){
-                if(parseInt(item[i].innerText)<80){
+            for(var i=0;i<itemList.length;i++){
+                if(parseInt(itemList[i].innerText)<80){
                     p = "불합격";
                 }
             }
@@ -147,14 +147,11 @@
         */
         var s = "해당없음";
         var q = 0;  //카운트변수 초기화
-        while(q < item.length){     //과목 우수자 계산
-            if(parseInt(item[q].innerText)==100) s = "과목우수";
+        while(q < itemList.length){     //과목 우수자 계산
+            if(parseInt(itemList[q].innerText)==100) s = "과목우수";
             q++;
         }
         console.log("과목 : "+s);
-
-
-
 
 
             tot.innerText = "총점: "+sum;
