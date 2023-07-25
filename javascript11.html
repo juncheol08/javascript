@@ -4,11 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자바스크립트 응용01 - 계산기</title>
+    <style>
+
+        #calculator {
+            width: 200px;
+            margin: 0 auto;
+        }
+        .cal_wrap {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        #display {
+            display: block;
+            margin: 0 auto;
+            width: 160px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #dcdcdc;
+        }
+        #res { background-color: #ccc;}
+        #res:hover { background-color: #a0a0a0;}
+        #cc {
+            width: 160px;
+            display: block;
+            margin: 0 auto;
+            padding: 4px;
+            font-size: 14px;
+            background-color: #ccc;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        #cc:hover {
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
     <div id="calculator">
         <div class="cal_wrap">
-            <input type="text" id="display">
+            <input type="text" id="display"><button id="cc" onclick="clearcalc()">초기화</button>
             <table>
                 <tr>
                     <td><button id="btn7" onclick="cal(7)">7</button></td>
@@ -34,9 +91,7 @@
                     <td><button id="res" onclick="rt()">=</button></td>
                     <td><button id="plus" onclick="cal('+')">+</button></td>
                 </tr>
-                <!-- <tr>
-                    <td colspan="4"><button id="c" onclick="clear()">초기화</button></td>
-                </tr> -->
+                
             </table>
         </div>
     </div>
@@ -44,17 +99,38 @@
     var display = document.getElementById("display");
     var a;
     function cal(btn){
+        // 숫자가 0으로 시작하면 8진수로 처리되므로 예외처리
+        if(display.value==0) {
+            display.value=null;
+        }
+        // if(btn=='.'|'+'|'-'|'*'|'/') {
+        //     var lastCharacter = display.value[display.value.length - 1];
+        //     if(lastCharacter=='.'|'+'|'-'|'*'|'/'){
+        //         display.value += null;    
+        //     }
+        // }
+        if (btn === '.' || btn === '+' || btn === '-' || btn === '*' || btn === '/') {
+        var lastCharacter = display.value[display.value.length - 1];
+        if (lastCharacter === '.' || lastCharacter === '+' || lastCharacter === '-' || lastCharacter === '*' || lastCharacter === '/') {
+        //   display.value += null;
+        return false;    
+            }
+        }
+        
         display.value = display.value + btn;
         a =  display.value;
     }    
     
     function rt(){ //eval()
+         
         display.value = eval(a);
     }
-    // function clear(){ 
-    //     display.value = '';
+
+    function clearcalc(){ 
+        display.value = null;
+        
        
-    // }
+    }
     </script>
 
 
