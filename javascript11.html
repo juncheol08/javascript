@@ -65,7 +65,7 @@
 <body>
     <div id="calculator">
         <div class="cal_wrap">
-            <input type="text" id="display"><button id="cc" onclick="clearcalc()">초기화</button>
+            <input type="text" id="display" readonly><button id="cc" onclick="clearcalc()" >Clear</button>
             <table>
                 <tr>
                     <td><button id="btn7" onclick="cal(7)">7</button></td>
@@ -98,22 +98,26 @@
     <script>
     var display = document.getElementById("display");
     var a;
+    
     function cal(btn){
-        // 숫자가 0으로 시작하면 8진수로 처리되므로 예외처리
-        if(display.value==0) {
-            display.value=null;
+        // 숫자가 0으로 시작하면 8진수로 처리됨
+        // 첫글자 불가 : /, *, +, 0   
+        if(display.value=='0'||display.value=='/'||display.value=='+'||display.value=='*'||display.value=='') {
+            if (btn === '.') {
+                display.value += ".";
+            } else { 
+                display.value=null;
+            }
+           
         }
-        // if(btn=='.'|'+'|'-'|'*'|'/') {
-        //     var lastCharacter = display.value[display.value.length - 1];
-        //     if(lastCharacter=='.'|'+'|'-'|'*'|'/'){
-        //         display.value += null;    
-        //     }
-        // }
+        
+        //
         if (btn === '.' || btn === '+' || btn === '-' || btn === '*' || btn === '/') {
-        var lastCharacter = display.value[display.value.length - 1];
-        if (lastCharacter === '.' || lastCharacter === '+' || lastCharacter === '-' || lastCharacter === '*' || lastCharacter === '/') {
-        //   display.value += null;
-        return false;    
+            var lastCharacter = display.value[display.value.length - 1];
+            // var firstCharacter = display.value[display.value.length - 1];
+            if (lastCharacter === '.' || lastCharacter === '+' || lastCharacter === '-' || lastCharacter === '*' || lastCharacter === '/') {
+
+            return false;    
             }
         }
         
@@ -129,7 +133,6 @@
     function clearcalc(){ 
         display.value = null;
         
-       
     }
     </script>
 
