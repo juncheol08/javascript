@@ -21,6 +21,7 @@
                     }
             res.innerHTML = html;
         }
+        console.log
         
         btn2.addEventListener("click",function() {
             res2.innerText = location.href;

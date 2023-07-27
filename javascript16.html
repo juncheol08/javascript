@@ -29,7 +29,11 @@
     #fastFwd { background-position:-72px 0px;  }
     #mute { background-position:0px 0px; background-image:url("/video/controls2.png"); }
     #unmute { background-position:0px -72px; display:none; }
-    #vmup { background-position:-48px -72px; }
+
+    #vmup { background-position:-48px -72px;  position:relative;}
+    #vmup:after {content: "◀+";display:block; color:deepskyblue;  margin-top:-8px; 
+    font-size:10px; position:absolute; top:2px; left:6px;}
+
     #vmdown { background-position:0px -24px; background-image:url("/video/controls2.png"); }
     #sizeup { background-size:72px 72px; background-image:url("/video/controls3.png"); 
     background-position:0px 0px; }
