@@ -36,14 +36,15 @@ pause.addEventListener("click", function () {  playPause();        });
 //정지 함수 호출
 stop.addEventListener("click", function () {     stopPlayer();     });
 //음소거 함수 호출
-mute.addEventListener("click", function () {    mutePlayer();    });
+mute.addEventListener("click", function () {    mutePlayer('mute');    });
 //음삽입 함수 호출
-unmute.addEventListener("click", function () {    volumeUpDown();    });
+unmute.addEventListener("click", function () {    volumeUpDown('unmute');    });
 //볼륨 조절바 기능 정의 및 호출
 vol.addEventListener("change", function(){  
     video.volume = this.value/1000;
     volTxt.innerText = parseInt(video.volume*100)+"%";
 });
+
 vmup.addEventListener("click", function () {        volumeUpDown("up");    });//볼륨업
 vmdown.addEventListener("click", function () {        volumeUpDown("down");    });//볼륨다운
 full.addEventListener("click", function () {        fullScreen();    });//풀스크린
@@ -54,11 +55,11 @@ sizedown.addEventListener("click", function(){  video.width -= 200;    }); //사
 
 //처음부터 다시 재생
 function restartPlay() {  
-    video.play(); 
+    video.play(); video.currentTime = 0; 
 }
 //앞으로, 뒤로 가기 함수 
 function skip(value) {  
-
+    video.currentTime += value
 
 } 
 //재생일시정지 함수
@@ -68,7 +69,7 @@ function playPause () {
     }
 }   
 //정지함수
-function stopPlayer () { video.pause(); video.currentTime = 0; } 
+function stopPlayer () { video.pause(); video.currentTime = 0;play.style.display = "inline-block";   pause.style.display = "none"; } 
 /* 음량 제어 처리부 */
 function mutePlayer (state) { //음소거토글함수
     if (state == "mute") { video.volume = 0;  mute.style.display = "none";
@@ -90,6 +91,7 @@ function volumeUpDown (dir) { //볼륨updown
         video.volume = parseFloat(change);
     }
     volTxt.innerText = parseInt(video.volume*100)+"%";
+    
 }
 
 //동영상 크기제어 처리부
